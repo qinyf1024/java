@@ -1,0 +1,103 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<script language="javascript" src="/js/jquery.js"></script>
+	<script language="javascript" src="/js/navbar.js"></script>
+	<link type="text/css" rel="stylesheet" href="/css/public.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>请假任务办理</title>
+</head>
+<body>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr>
+		<td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="24" bgcolor="#353c44"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="6%" height="19" valign="bottom"><div align="center"><img src="/images/tb.gif" width="14" height="14" /></div></td>
+								<td width="94%" valign="bottom"><span class="STYLE1">请假申请的任务办理</span></td>
+							</tr>
+						</table></td>
+						<td><div align="right"><span class="STYLE1">
+		              </span></div></td>
+					</tr>
+				</table></td>
+			</tr>
+		</table></td>
+	</tr>
+	<tr>
+		<td>
+			<form action="/submitTask" method="POST">
+				<div align="left" class="STYLE21" th:each="leaveBill:${leaveBill}">
+					<!-- 任务ID -->
+                    <input type="hidden"  name="taskId" th:value="${taskId}"/>
+					<!-- 请假单ID -->
+					<input type="hidden"  name="id" th:value="${leaveBill.id}"/>
+					请假天数:<textfield name="days" th:text="${leaveBill.days}" disabled="true" cssStyle="width: 200px;"/><br/>
+					请假原因:<textfield name="content" th:text="${leaveBill.content}" disabled="true" cssStyle="width: 800px;"/><br/>
+					请假备注:<textarea name="remark" th:text="${leaveBill.remark}" disabled="true" cols="30" rows="2"></textarea><br/>
+					批&emsp;&emsp;注:<textarea name="comment" cols="50" rows="5"></textarea><br/>
+					<!-- 使用连线的名称作为按钮 -->
+					<input type="submit" name="outcome" th:each="outcomeList:${outcomeList}" th:value="${outcomeList}" class="button_ok"/>
+
+				</div>
+			</form>
+		</td>
+	</tr>
+</table>
+<hr>
+<br>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="24" bgcolor="#353c44"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="6%" height="19" valign="bottom"><div align="center"><img src="/images/tb.gif" width="14" height="14" /></div></td>
+                                <td width="94%" valign="bottom"><span class="STYLE1">显示请假申请的批注信息</span></td>
+                            </tr>
+                        </table></td>
+                        <td><div align="right"><span class="STYLE1">
+                      </span></div></td>
+                    </tr>
+                </table></td>
+            </tr>
+        </table></td>
+    </tr>
+    <tr>
+        <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce" onmouseover="changeto()"  onmouseout="changeback()">
+            <tr>
+                <td width="15%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">时间</span></div></td>
+                <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">批注人</span></div></td>
+                <td width="75%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">批注信息</span></div></td>
+            </tr>
+            <tr th:each="commentList:${commentList}">
+                <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><span th:text="${commentList.time}"></span></div></td>
+                <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><span th:text="${commentList.userId}"></span></div></td>
+                <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><span th:text="${commentList.fullMessage}"></span></div></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="24" bgcolor="#F7F7F7"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="6%" height="19" valign="bottom"><div align="center"><img src="/images/tb.gif" width="14" height="14" /></div></td>
+                                <td width="94%" valign="bottom"><span><b>暂时没有批注信息</b></span></td>
+                            </tr>
+                        </table></td>
+                    </tr>
+                </table></td>
+            </tr>
+        </table></td>
+    </tr>
+</table>
+</body>

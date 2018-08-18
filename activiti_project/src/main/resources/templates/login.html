@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录</title>
+<link rel="stylesheet" href="css/login.css">
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+</head>
+
+<body>
+
+<div class="login-box">
+	<h1>系统后台登录</h1>
+	<form method="post" th:action="@{/login}">
+		<div class="name">
+			<!--<label>用户账号：</label>-->
+			<input type="text" name="username" tabindex="1" autocomplete="off" placeholder="请输入账户" />
+		</div>
+		<div class="password">
+			<!--<label>密&emsp;&emsp;码：</label>-->
+			<input type="password" name="password" maxlength="16" id="" tabindex="2" placeholder="请输入密码"/>
+		</div>
+		<!--<div class="code">
+			<label>验证码：</label>
+			<input type="text" name="" maxlength="4" id="code" tabindex="3"/>
+			<div class="codeImg">
+				<img src="images/captcha.jpeg.jpg" />
+			</div>
+		</div>-->
+		<div class="remember">
+			<input type="checkbox" id="remember" tabindex="4" name="remember-me" value="true"/>
+			<label>记住密码</label>
+		</div>
+		<div class="login">
+			<button type="submit" tabindex="5">登录</button>
+		</div>
+	</form>
+</div>
+
+
+<div class="screenbg">
+	<ul>
+		<li><a href="javascript:;"><img src="images/1.jpg"></a></li>
+	</ul>
+</div>
+</body>
+</html>

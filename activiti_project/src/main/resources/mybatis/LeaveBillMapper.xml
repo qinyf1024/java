@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yue.dao.LeaveBillDao">
+    <!--查询自己的请假单的信息-->
+    <select id="findAll" resultType="com.yue.domain.LeaveBill">
+        SELECT * FROM a_leavebill
+    </select>
+
+    <resultMap type="com.yue.domain.LeaveBill" id="leaveBillResultMap">
+        <id property="id" column="id" />
+        <result property="days" column="days" />
+        <result property="content" column="content" />
+        <result property="leaveDate" column="leaveDate" />
+        <result property="remark" column="remark" />
+        <result property="state" column="state" />
+        <collection property="user" ofType="com.yue.domain.Employee">
+            <id property="id" column="id" />
+            <result property="name" column="name" />
+        </collection>
+    </resultMap>
+    <select id="findLeaveBillList" resultMap="leaveBillResultMap"
+            parameterType="long">
+        SELECT
+        *
+        FROM
+        a_leavebill l
+        JOIN a_employee e ON l.user_id = e.id
+        WHERE
+        l.user_id = #{userId}
+    </select>
+
+    <!--增加请假申请-->
+    <insert id="addSave" parameterType="com.yue.domain.LeaveBill" useGeneratedKeys="true">
+        insert into a_leavebill(days,content,remark,leaveDate,state,user_id)
+        values(#{days},#{content},#{remark},NOW(),0,#{id})
+    </insert>
+    <!--根据ID查询数据，回显-->
+    <select id="findOne" resultType="com.yue.domain.LeaveBill">
+        SELECT * FROM a_leavebill WHERE id = #{id}
+    </select>
+    <!--修改请假申请-->
+    <update id="editSave" parameterType="com.yue.domain.LeaveBill">
+        UPDATE a_leavebill SET days=#{days},content=#{content},remark=#{remark} WHERE id = #{id}
+    </update>
+
+    <!--删除请假申请-->
+    <delete id="deleteOne" parameterType="Long">
+        delete from a_leavebill where id=#{id}
+    </delete>
+
+    <!--更改请假单状态为 1 -->
+    <update id="updateState" parameterType="com.yue.domain.LeaveBill">
+        UPDATE a_leavebill SET state=1 WHERE id = #{id}
+    </update>
+
+    <!--更改请假单状态为 2 -->
+    <update id="updateState2" parameterType="com.yue.domain.LeaveBill">
+        UPDATE a_leavebill SET state=2 WHERE id = #{id}
+    </update>
+</mapper>

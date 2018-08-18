@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yue.dao.EmployeeDao">
+	<!--根据用户名查询用户信息-->
+	<select id="findEmployeeByName" resultType="com.yue.domain.Employee">
+		SELECT * FROM a_employee WHERE NAME=#{name}
+	</select>
+
+	<!--根据用户ID查询用户信息-->
+	<select id="findId" resultType="com.yue.domain.Employee">
+		SELECT * FROM a_employee WHERE id=#{id}
+	</select>
+
+</mapper>
